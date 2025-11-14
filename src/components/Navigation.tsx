@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
 
 export function Navigation() {
@@ -25,7 +24,7 @@ export function Navigation() {
 
   const scrollToSection = (href: string) => {
     setIsMobileMenuOpen(false);
-    
+
     if (href === "#home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -46,11 +45,10 @@ export function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? "bg-white shadow-md"
           : "bg-white/10 backdrop-blur-md"
-      }`}
+        }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -60,9 +58,8 @@ export function Navigation() {
               e.preventDefault();
               scrollToSection("#home");
             }}
-            className={`transition-colors ${
-              isScrolled ? "text-gray-900" : "text-white"
-            }`}
+            className={`transition-colors ${isScrolled ? "text-gray-900" : "text-white"
+              }`}
           >
             {"<EMJ />"}
           </a>
@@ -77,9 +74,8 @@ export function Navigation() {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className={`transition-colors hover:text-blue-600 ${
-                  isScrolled ? "text-gray-700" : "text-white"
-                }`}
+                className={`transition-colors hover:text-blue-600 ${isScrolled ? "text-gray-700" : "text-white"
+                  }`}
               >
                 {item.label}
               </a>
@@ -88,9 +84,8 @@ export function Navigation() {
 
           {/* Mobile Menu Button */}
           <button
-            className={`md:hidden p-2 ${
-              isScrolled ? "text-gray-900" : "text-white"
-            }`}
+            className={`md:hidden p-2 ${isScrolled ? "text-gray-900" : "text-white"
+              }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
