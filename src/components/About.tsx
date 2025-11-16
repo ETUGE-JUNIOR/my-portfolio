@@ -27,7 +27,7 @@ export function About() {
           <h2 className="mb-4">About Me</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             I'm a passionate frontend developer and UI/UX designer who loves creating seamless digital experiences. 
-            With a strong foundation in React, TypeScript, and JavaScript, I bring designs to life with clean, efficient code.
+            With a strong foundation in <span className="text-blue-700" >React</span> , <span className="text-blue-700" >TypeScript</span>, and <span className="text-blue-700" >JavaScript</span>, I bring designs to life with clean, efficient code.
           </p>
         </div>
 
