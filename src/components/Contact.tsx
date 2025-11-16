@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 export function Contact() {
   const contactInfo = [
@@ -14,7 +14,7 @@ export function Contact() {
     {
       icon: Phone,
       label: "Phone",
-      value: "+237 XXX XXX XXX",
+      value: "+237 678-12-88-57",
     },
     {
       icon: MapPin,
@@ -57,6 +57,31 @@ export function Contact() {
                   <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
                     Send Message
                   </Button>
+                  <div className="flex gap-4 justify-center items-center w-full"><div className="w-full  bg-gray-500 border  "></div> <p>Others</p> <div className="w-full  bg-gray-500 border  "></div> </div>
+                  <div className="flex gap-4 justify-center">
+                            <a 
+                              href="https://whatsapp.com/YOUR_GITHUB_USERNAME" 
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-3  backdrop-blur-sm rounded-full hover:bg-gray-700 transition-colors border border-gray-700"
+                            >
+                              <Instagram className="h-5 w-5" />
+                            </a>
+                            <a 
+                              href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" 
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-3  backdrop-blur-sm rounded-full hover:bg-gray-700 transition-colors border border-gray-700"
+                            >
+                              <Linkedin className="h-5 w-5" />
+                            </a>
+                            <a 
+                              href="mailto:your.email@example.com" 
+                              className="p-3  backdrop-blur-sm rounded-full hover:bg-gray-700 transition-colors border border-gray-700"
+                            >
+                              <Mail className="h-5 w-5" />
+                            </a>
+                  </div>
                 </form>
               </CardContent>
             </Card>

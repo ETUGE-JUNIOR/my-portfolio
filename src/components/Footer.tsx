@@ -4,7 +4,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-gray-900 text-white py-2">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
@@ -23,7 +23,7 @@ export function Footer() {
             </a>
             <a
               href="#"
-              className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
+              className="p-2 bg-gray-800  rounded-full hover:bg-gray-700 transition-colors"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-5 w-5" />

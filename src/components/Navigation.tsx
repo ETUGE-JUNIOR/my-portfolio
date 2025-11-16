@@ -47,7 +47,7 @@ export function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? "bg-white shadow-md"
-          : "bg-white/10 backdrop-blur-md"
+          : "bg-black backdrop-blur-md"
         }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,7 +58,7 @@ export function Navigation() {
               e.preventDefault();
               scrollToSection("#home");
             }}
-            className={`transition-colors ${isScrolled ? "text-gray-900" : "text-white"
+            className={`transition-colors ${isScrolled ? "text-gray-600" : "text-white"
               }`}
           >
             {"<EMJ />"}
@@ -74,7 +74,7 @@ export function Navigation() {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className={`transition-colors hover:text-blue-600 ${isScrolled ? "text-gray-700" : "text-white"
+                className={`transition-colors hover:text-blue-600 ${isScrolled ? "text-gray-900" : "text-white"
                   }`}
               >
                 {item.label}
@@ -99,7 +99,7 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 bg-[rgba(255,255,255,0)] border-t text-[rgb(255,255,255)]">
+          <div className="md:hidden py-4 bg-red-500 border-t text-[rgb(255,255,255)]">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -108,7 +108,7 @@ export function Navigation() {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="block py-3 px-4 text-gray-100 hover:bg-gray-900/40 rounded-md  hover:text-blue-600 transition-colors"
+                className="block py-3 px-4 text-gray-600 hover:bg-gray-900/40 rounded-md  hover:text-blue-600 transition-colors"
               >
                 {item.label}
               </a>

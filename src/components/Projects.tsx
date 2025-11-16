@@ -11,23 +11,23 @@ interface ProjectsProps {
 export function Projects({ onViewAll }: ProjectsProps) {
   const projects = [
     {
-      title: "Project One",
+      title: "Gestion de vote  en ligne ( IvoteU )",
       description: "A modern web application built with React and TypeScript. Currently in development with core features being implemented.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBhcHBsaWNhdGlvbnxlbnwxfHx8fDE3NjI4Mzc5NDR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tags: ["React", "TypeScript", "Tailwind CSS"],
+      tags: ["React", "JavaScript", "Tailwind CSS"],
       status: "In Development",
       github: "#",
     },
     {
-      title: "Project Two",
+      title: "🍁 TCF CANADA ",
       description: "An interactive user interface showcasing modern design principles and responsive layouts. Work in progress.",
       image: "https://images.unsplash.com/photo-1605108222700-0d605d9ebafe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzYyODIxNDM0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tags: ["JavaScript", "CSS3", "React"],
+      tags: ["JavaScript", "CSS3", "React", "Tailwind CSS"],
       status: "In Development",
       github: "#",
     },
     {
-      title: "Project Three",
+      title: " AI Recipe generator",
       description: "A creative project exploring advanced frontend techniques and modern web APIs. Currently being built.",
       image: "https://images.unsplash.com/photo-1569693799105-4eb645d89aea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjBwcm9qZWN0fGVufDF8fHx8MTc2MjkxNDAyN3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
       tags: ["React", "JavaScript", "HTML5"],
