@@ -1,16 +1,32 @@
 import { Button } from "./ui/button";
-import { Github, Linkedin, Mail } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { Download, Github, Linkedin, Mail } from "lucide-react";
+import { ImageWithFallback } from "./ImageWithFallback";
+import { GlowButton } from "./ui/GlowButton";
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
+    <GlowButton
+              onClick={() => {
+                // This will trigger download of CV
+                // Replace with actual CV file path
+                const link = document.createElement('a');
+                link.href = '/cv.pdf'; // Update with your actual CV path
+                link.download = 'Etuge_Marxsim_Junior_CV.pdf';
+                link.click();
+              }}
+            >
+              <Download className="h-5 w-5" />
+              Download CV
+      </GlowButton>
       <div className="absolute inset-0 opacity-20">
         <ImageWithFallback
-          src="../imgs/ivoteU-logo-bg.jpg"
+          src="https://images.unsplash.com/photo-1707528041466-83a325f01a3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYyOTE2NjQ3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+          // src="../assets/imgs/ivoteU-logo-bg.jpg"
           alt="Developer workspace"
           className="w-full h-full object-cover"
         />
+        {/* <img src="../assets/imgs/ivoteU-logo-bg.jpg" alt="" className="w-full h-full object-cover" /> */}
       </div>
       
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -76,7 +92,7 @@ export function Hero() {
             <Linkedin className="h-5 w-5" />
           </a>
           <a 
-            href="mailto:your.email@example.com" 
+            href="etugemarxsim@example.com" 
             className="p-3 bg-gray-800/50 backdrop-blur-sm rounded-full hover:bg-gray-700 transition-colors border border-gray-700"
           >
             <Mail className="h-5 w-5" />

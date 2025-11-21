@@ -9,29 +9,29 @@ import { Navigation } from "./components/Navigation";
 import { AllProjects } from "./components/AllProjects";
 
 export default function App() {
-  const [showAllProjects, setShowAllProjects] = useState(false);
+    const [showAllProjects, setShowAllProjects] = useState(false);
 
-  if (showAllProjects) {
+    if (showAllProjects) {
+        return (
+            <>
+                <Navigation />
+                <AllProjects onBack={() => setShowAllProjects(false)} />
+                <Footer />
+            </>
+        );
+    }
+
     return (
-      <>
-        <Navigation />
-        <AllProjects onBack={() => setShowAllProjects(false)} />
-        <Footer />
-      </>
+        <div className="min-h-screen">
+            <Navigation />
+            <div id="home">
+                <Hero />
+            </div>
+            <About />
+            <Projects onViewAll={() => setShowAllProjects(true)} />
+            <Skills />
+            <Contact />
+            <Footer />
+        </div>
     );
-  }
-
-  return (
-    <div className="min-h-screen">
-      <Navigation />
-      <div id="home">
-        <Hero />
-      </div>
-      <About />
-      <Projects onViewAll={() => setShowAllProjects(true)} />
-      <Skills />
-      <Contact />
-      <Footer />
-    </div>
-  );
 }
