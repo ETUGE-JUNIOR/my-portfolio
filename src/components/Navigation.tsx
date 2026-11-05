@@ -47,8 +47,8 @@ export function Navigation() {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                ? "bg-white dark:bg-gray-900 shadow-md"
-                : "bg-white/10 dark:bg-black/20 backdrop-blur-md"
+                ? "bg-secondary backdrop-blur-2xl shadow-2xl"
+                : "backdrop-blur-md"
                 }`}
         >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,10 +59,10 @@ export function Navigation() {
                             e.preventDefault();
                             scrollToSection("#home");
                         }}
-                        className={`transition-colors ${isScrolled ? "text-gray-900" : "text-white"
-                            }`}
+                        className={`transition-colors text-purple-500 font-black mask-radial-from-neutral-500  `
+                            }
                     >
-                        {"<EMJ />"}
+                        {"<EMJ/>"}
                     </a>
 
                     {/* Desktop Navigation */}
@@ -75,7 +75,7 @@ export function Navigation() {
                                     e.preventDefault();
                                     scrollToSection(item.href);
                                 }}
-                                className={`transition-colors hover:text-blue-600 ${isScrolled ? "text-gray-700 dark:text-gray-200" : "text-white"
+                                className={`transition-colors hover:text-purple-700 ${isScrolled ? "text-purple-600" : "text-purple-400"
                                     }`}
                             >
                                 {item.label}

@@ -24,13 +24,13 @@ export function ThemeSwitcher() {
     return (
         <button
             onClick={() => setIsDark(!isDark)}
-            className="relative inline-flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300 hover:bg-gray-200 dark:hover:bg-gray-700 active:scale-95"
+            className="relative inline-flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300 hover:bg-secondary active:scale-95"
             aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
             title={`Switch to ${isDark ? "light" : "dark"} mode`}
         >
             {/* Sun icon for light mode */}
             <Sun
-                className={`absolute w-6 h-6 transition-all duration-500 transform ${isDark
+                className={`absolute w-6 h-6 transition-all duration-500 transform text-chart-4 ${isDark
                     ? "opacity-0 scale-0 -rotate-180"
                     : "opacity-100 scale-100 rotate-0"
                     }`}

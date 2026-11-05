@@ -2,42 +2,48 @@ import { Button } from "./ui/button";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 import { ImageWithFallback } from "./ImageWithFallback";
 import { GlowButton } from "./ui/GlowButton";
+import ProfilePicture from "../assets/imgs/profile-picture.jpg"
+import BgImage from '../assets/imgs/bg-img.jpg'
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
-    <GlowButton
-              onClick={() => {
-                // This will trigger download of CV
-                // Replace with actual CV file path
-                const link = document.createElement('a');
-                link.href = '/cv.pdf'; // Update with your actual CV path
-                link.download = 'Etuge_Marxsim_Junior_CV.pdf';
-                link.click();
-              }}
-            >
-              <Download className="h-5 w-5" />
-              Download CV
-      </GlowButton>
+    <section className=" relative min-h-screen flex items-center justify-center bg-linear-to-t  from-black/20 via-black/75 to-black text-white overflow-hidden">
+        <div className="flex gap-4 absolute right-4 top-20 items-center ">
+            {/* profile picture */}
+            <div className=" cursor-pointer border border-amber-400 h-10 w-10 flex justify-center items-center rounded-full shadow-2xl bg-purple-100 overflow-clip align-middle group">
+                <ImageWithFallback src={ProfilePicture} alt="My profile picture" className="cursor-pointer w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" />
+            </div>
+
+            <GlowButton
+                className="group h-10 text-sm"
+                onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = '/cv.pdf'; // Update with your actual CV path
+                    link.download = 'Etuge_Marxsim_Junior_CV.pdf';
+                    link.click();
+                }}
+                >
+                <Download className="h-5 w-5 text-purple-400 group-hover:text-violet-200 " size={18} />
+                Download CV
+            </GlowButton>
+        </div>
       <div className="absolute inset-0 opacity-20">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1707528041466-83a325f01a3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYyOTE2NjQ3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-          // src="../assets/imgs/ivoteU-logo-bg.jpg"
+          src={BgImage}
           alt="Developer workspace"
           className="w-full h-full object-cover"
         />
-        {/* <img src="../assets/imgs/ivoteU-logo-bg.jpg" alt="" className="w-full h-full object-cover" /> */}
       </div>
       
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-4xl mt-9 mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="mb-6">
-          <div className="inline-block px-4 py-2 bg-blue-600/20 border border-blue-500/30 rounded-full backdrop-blur-sm">
-            <span className="text-blue-400">👋 Welcome to my portfolio</span>
+          <div className="inline-block px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-full backdrop-blur-sm">
+            <span className="text-purple-400">👋 Welcome to my portfolio</span>
           </div>
         </div>
         
         <h1 className="mb-6">
-          Hi, I'm <span className="text-blue-500">Etuge Marxsim Junior</span>
+          Hi, I'm <span className="text-purple-400">Etuge Marxsim Junior</span>
         </h1>
         
         <h2 className="mb-6 text-gray-300">
@@ -50,9 +56,9 @@ export function Hero() {
         </p>
         
         <div className="flex flex-wrap gap-4 justify-center mb-8">
-          <Button 
+          <Button
             size="lg" 
-            className="bg-blue-600 hover:bg-blue-700"
+            className=" cursor-pointer"
             onClick={() => {
               const contactSection = document.getElementById('contact');
               contactSection?.scrollIntoView({ behavior: 'smooth' });
@@ -64,7 +70,7 @@ export function Hero() {
           <Button 
             size="lg" 
             variant="outline" 
-            className="border-gray-600 text-[rgba(0,124,255,0.94)] hover:bg-gray-800"
+            className=" cursor-pointer border-purple-600 dark:border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-200 hover:text-purple-600"
             onClick={() => {
               const projectsSection = document.getElementById('projects');
               projectsSection?.scrollIntoView({ behavior: 'smooth' });
@@ -76,7 +82,7 @@ export function Hero() {
         
         <div className="flex gap-4 justify-center">
           <a 
-            href="https://github.com/YOUR_GITHUB_USERNAME" 
+            href="https://github.com/ETUGE-JUNIOR" 
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 bg-gray-800/50 backdrop-blur-sm rounded-full hover:bg-gray-700 transition-colors border border-gray-700"
@@ -92,7 +98,7 @@ export function Hero() {
             <Linkedin className="h-5 w-5" />
           </a>
           <a 
-            href="etugemarxsim@example.com" 
+            href="https://gmail.com/etugemarxsimjunior@gmail.com" 
             className="p-3 bg-gray-800/50 backdrop-blur-sm rounded-full hover:bg-gray-700 transition-colors border border-gray-700"
           >
             <Mail className="h-5 w-5" />
