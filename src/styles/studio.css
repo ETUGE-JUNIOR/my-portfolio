@@ -1,0 +1,17 @@
+/* EMJ Digital Studio tokens. Import AFTER globals.css (see src/styles/index.css).
+   Grid rule: 8pt. In Tailwind v4 the default step is 4px, so use EVEN steps only
+   (p-2 = 8, p-4 = 16, p-6 = 24, p-8 = 32). Layout anchors: panel 28rem (448), meta column 16rem (256). */
+@theme {
+  --color-electric: #4a3aff;       /* accent on paper (6.9:1) */
+  --color-electric-soft: #9a92ff;  /* accent on charcoal (text-safe) */
+  --color-charcoal: #1e2024;
+  --color-paper: #f6f6f3;
+  --color-rule: #d6d6d0;
+  --font-sans: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  .studio :focus-visible { outline: 2px solid var(--color-electric); outline-offset: 2px; }
+  .studio aside :focus-visible { outline-color: var(--color-electric-soft); }
+}
