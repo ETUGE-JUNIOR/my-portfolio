@@ -1,4 +1,5 @@
 import { caseStudies, type Status } from "../../data/studio";
+import { Frame } from "./Frame";
 
 const statusLabel: Record<Status, string> = {
   live: "Live",
@@ -6,32 +7,37 @@ const statusLabel: Record<Status, string> = {
   draft: "Case study in progress",
 };
 
+const pad = (n: number) => String(n).padStart(2, "0");
+
 export function CaseStudyList() {
   return (
-    <div id="projects" className="scroll-mt-8">
-      <h2 className="mb-8 text-3xl font-semibold tracking-tight">Case studies</h2>
+    <div id="projects" className="scroll-mt-20">
+      <div className="mb-8 flex items-baseline justify-between gap-4">
+        <h2 className="text-5xl font-semibold tracking-tight">Case studies</h2>
+        <p className="text-sm tabular-nums text-charcoal/60">{pad(caseStudies.length)} projects</p>
+      </div>
+
       <div className="border-b border-charcoal">
-        {caseStudies.map((c) => (
+        {caseStudies.map((c, i) => (
           <article
             key={c.id}
             id={c.id}
-            className="scroll-mt-8 grid gap-6 border-t border-charcoal py-8 lg:grid-cols-[16rem_1fr] lg:gap-8"
+            className="scroll-mt-20 grid gap-6 border-t border-charcoal py-12 @4xl:grid-cols-[16rem_1fr] @4xl:gap-8"
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-3 @4xl:flex-col @4xl:items-start @4xl:gap-4 @4xl:sticky @4xl:top-20 @4xl:self-start">
+              <p className="text-5xl font-semibold leading-none tabular-nums text-electric">{pad(i + 1)}</p>
               <span
                 className={
                   "w-fit border px-2 py-1 text-sm " +
-                  (c.status === "live"
-                    ? "border-electric bg-electric text-paper"
-                    : "border-charcoal")
+                  (c.status === "live" ? "border-electric bg-electric text-paper" : "border-charcoal bg-paper")
                 }
               >
                 {statusLabel[c.status]}
               </span>
               {c.stack.length > 0 && (
-                <ul className="flex flex-wrap gap-2 text-sm">
+                <ul className="flex w-full flex-wrap gap-2 text-sm @4xl:w-auto">
                   {c.stack.map((t) => (
-                    <li key={t} className="border border-rule px-2 py-1">
+                    <li key={t} className="border border-rule bg-paper px-2 py-1">
                       {t}
                     </li>
                   ))}
@@ -54,29 +60,25 @@ export function CaseStudyList() {
             </div>
 
             <div>
-              <h3 className="text-2xl font-semibold tracking-tight">{c.title}</h3>
-              <p className="mt-2 max-w-[60ch] text-charcoal/80">{c.summary}</p>
+              <h3 className="text-3xl font-semibold tracking-tight">{c.title}</h3>
+              <p className="mt-2 max-w-[60ch] text-lg text-charcoal/80">{c.summary}</p>
+
+              {c.images && c.images.length > 0 && (
+                <div className="mt-8 grid gap-8">
+                  {c.images.map((im) => (
+                    <Frame key={im.src} {...im} />
+                  ))}
+                </div>
+              )}
+
               {(c.problem || c.solution || c.role || c.statusNote || c.proof) && (
-                <dl className="mt-6 grid max-w-[60ch] gap-4">
+                <dl className="mt-8 grid max-w-[60ch] gap-4">
                   {c.problem && <Row term="Problem" text={c.problem} />}
                   {c.solution && <Row term="Solution" text={c.solution} />}
                   {c.role && <Row term="My role" text={c.role} />}
                   {c.statusNote && <Row term="Where it stands" text={c.statusNote} />}
                   {c.proof && <Row term="How it was checked" text={c.proof} />}
                 </dl>
-              )}
-              {c.images && c.images.length > 0 && (
-                <div className="mt-8 grid gap-4">
-                  {c.images.map((im) => (
-                    <img
-                      key={im.src}
-                      src={im.src}
-                      alt={im.alt}
-                      loading="lazy"
-                      className="w-full border border-charcoal"
-                    />
-                  ))}
-                </div>
               )}
             </div>
           </article>

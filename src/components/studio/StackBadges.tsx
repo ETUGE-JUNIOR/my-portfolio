@@ -2,14 +2,14 @@ import { stack } from "../../data/studio";
 
 export function StackBadges() {
   return (
-    <section aria-labelledby="stack" className="mt-16">
-      <h2 id="stack" className="text-3xl font-semibold tracking-tight">
+    <section id="stack" aria-labelledby="stack-title" className="scroll-mt-20">
+      <h2 id="stack-title" className="text-5xl font-semibold tracking-tight">
         Tech stack
       </h2>
       <p className="mt-2 max-w-[60ch] text-charcoal/80">
         Shipped means used in a deployed project. Practiced means on the CV, with no public project yet.
       </p>
-      <ul className="mt-8 grid gap-px border border-charcoal bg-charcoal sm:grid-cols-2 xl:grid-cols-3">
+      <ul className="mt-8 grid gap-px border border-charcoal bg-charcoal @xl:grid-cols-2 @4xl:grid-cols-3">
         {stack.map((s) => (
           <li key={s.name} className="bg-paper p-4">
             <div className="flex items-center justify-between gap-2">

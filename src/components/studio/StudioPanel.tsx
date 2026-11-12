@@ -1,86 +1,67 @@
-import { Link } from "react-router-dom";
+import type { TouchEvent } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { studio } from "../../data/studio";
+import { members } from "../../data/team";
 
-const nav = [
-  { label: "Home", to: "/" },
-  { label: "Projects", to: "/#projects" },
-  { label: "Contacts", to: "/#contacts" },
-];
+interface StudioPanelProps {
+  open: boolean;
+  onNavigate: () => void;
+  onTouchStart: (e: TouchEvent<HTMLElement>) => void;
+  onTouchEnd: (e: TouchEvent<HTMLElement>) => void;
+}
 
-export function StudioPanel() {
+export function StudioPanel({ open, onNavigate, onTouchStart, onTouchEnd }: StudioPanelProps) {
+  const { pathname, hash } = useLocation();
+  const profile = `/team/${members[0].slug}`;
+
+  const items = [
+    { label: "Home", to: "/", current: pathname === "/" && !hash },
+    { label: "Projects", to: "/#projects", current: false },
+    { label: "Services", to: "/#services", current: false },
+    { label: "Team", to: "/#team", current: false },
+    { label: "Profile", to: profile, current: pathname.startsWith("/team/") },
+  ];
+
   return (
     <aside
-      id="home"
-      className="bg-charcoal text-paper lg:fixed lg:inset-y-0 lg:left-0 lg:w-md lg:overflow-y-auto"
+      id="studio-drawer"
+      aria-label="Studio menu"
+      tabIndex={-1}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      className={
+        "fixed bottom-0 left-0 top-14 z-20 flex w-[min(20rem,85vw)] flex-col overflow-y-auto overscroll-contain bg-charcoal px-6 py-6 text-paper [scrollbar-width:thin] outline-none transition-[translate,visibility] duration-300 ease-out motion-reduce:transition-none lg:w-80 " +
+        (open ? "visible translate-x-0" : "invisible -translate-x-full")
+      }
     >
-      <div className="flex min-h-full flex-col px-6 py-8 lg:px-8">
-        <header className="border-b border-paper/20 pb-4">
-          <Link to="/" className="text-xl font-semibold tracking-tight">
-            {studio.name}
-          </Link>
-          <nav aria-label="Primary" className="mt-4 flex gap-6 text-sm">
-            {nav.map((n) => (
-              <Link key={n.to} to={n.to} className="text-paper/70 hover:text-paper">
-                {n.label}
-              </Link>
-            ))}
-          </nav>
-        </header>
+      <p className="max-w-[30ch] text-base text-paper/80">{studio.line}</p>
 
-        <section className="py-12">
-          <h1 className="max-w-[16ch] text-5xl font-semibold leading-[1.05] tracking-tight">
-            {studio.headline}
-          </h1>
-          <p className="mt-6 max-w-[40ch] text-paper/75">{studio.value}</p>
-        </section>
-
-        <section aria-labelledby="services">
-          <h2 id="services" className="mb-4 text-sm font-medium text-electric-soft">
-            Services
-          </h2>
-          <dl>
-            {studio.services.map((s) => (
-              <div key={s.name} className="grid grid-cols-[8rem_1fr] gap-4 border-t border-paper/20 py-4">
-                <dt className="font-medium">{s.name}</dt>
-                <dd className="text-sm text-paper/70">{s.text}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        <section aria-labelledby="team" className="mt-12">
-          <h2 id="team" className="mb-4 text-sm font-medium text-electric-soft">
-            The EMJ Team
-          </h2>
-          <ul className="grid gap-2">
-            {studio.team.map((m) => (
-              <li
-                key={m.role}
+      <nav aria-label="Primary" className="mt-8">
+        <ul>
+          {items.map((n, i) => (
+            <li key={n.label} className="border-t border-paper/20 last:border-b">
+              <Link
+                to={n.to}
+                onClick={onNavigate}
+                aria-current={n.current ? "page" : undefined}
                 className={
-                  m.holder
-                    ? "border border-paper/30 border-l-4 border-l-electric-soft p-4"
-                    : "border border-paper/30 p-4"
+                  "flex items-baseline gap-4 py-2 text-2xl font-medium transition-colors hover:text-electric-soft motion-reduce:transition-none " +
+                  (n.current ? "text-electric-soft" : "")
                 }
               >
-                <p className="font-medium">{m.role}</p>
-                {m.holder && <p className="text-sm">{m.holder}</p>}
-                <p className="text-sm text-paper/60">{m.focus}</p>
-                {m.slug && (
-                  <Link to={`/team/${m.slug}`} className="mt-2 inline-block text-sm text-electric-soft underline underline-offset-4">
-                    View profile
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
+                <span className="text-sm tabular-nums text-electric-soft">{String(i + 1).padStart(2, "0")}</span>
+                {n.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-        <footer id="contacts" className="mt-auto border-t border-paper/20 pt-8">
-          <p className="text-sm text-paper/70">Start a project</p>
-          <a href={`mailto:${studio.email}`} className="text-lg underline underline-offset-4">
-            {studio.email}
-          </a>
-        </footer>
+      <div className="mt-auto pt-6">
+        <p className="text-sm text-paper/70">Start a project</p>
+        <a href={`mailto:${studio.email}`} className="break-all underline underline-offset-4">
+          {studio.email}
+        </a>
       </div>
     </aside>
   );
