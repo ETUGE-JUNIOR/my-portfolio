@@ -10,13 +10,14 @@ export interface CaseStudy {
   proof?: string;
   role?: string;
   statusNote?: string;
-  images?: { src: string; alt: string }[];
+  images?: { src: string; label: string; alt: string; width: number; height: number }[];
   stack: string[];
   links?: { live?: string; code?: string };
 }
 
 export const studio = {
   name: "EMJ Digital Studio",
+  line: "Remote-first web design and development. Cameroon and abroad.",
   headline: "Interfaces designed in Figma, shipped in React.",
   value:
     "A remote-first web design and development studio, building clear, fast websites and web apps for businesses in Cameroon and abroad.",
@@ -49,8 +50,8 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Figma", "React", "TypeScript", "Vite", "Tailwind CSS", "Django", "Firebase"],
     links: { live: "https://campus-info-frontend.vercel.app" },
     images: [
-      { src: "/projects/campus-info/landing.webp", alt: "Campus Info landing page with the headline 'Never miss an academic announcement' and a notification preview card." },
-      { src: "/projects/campus-info/admin-dashboard.webp", alt: "Campus Info administrator dashboard with announcement counts, recent announcements and quick actions." },
+      { src: "/projects/campus-info/landing.webp", label: "Landing page", width: 1302, height: 638, alt: "Campus Info landing page with the headline 'Never miss an academic announcement' and a notification preview card." },
+      { src: "/projects/campus-info/admin-dashboard.webp", label: "Admin dashboard", width: 1366, height: 642, alt: "Campus Info administrator dashboard with announcement counts, recent announcements and quick actions." },
     ],
   },
   {
@@ -69,8 +70,8 @@ export const caseStudies: CaseStudy[] = [
       "Design, interfaces and back end are done for version 1. The final installer and another round of MVP testing remain.",
     stack: ["Figma", "React", "JavaScript", "Node.js", "Express", "PostgreSQL", "Electron", "GitHub"],
     images: [
-      { src: "/projects/drink-manage/dashboard.webp", alt: "Drink Manage dashboard showing sales, stock, crates, damages and receivables cards, with a sidebar of modules." },
-      { src: "/projects/drink-manage/login.webp", alt: "Drink Manage login screen with a short list of the app's modules beside the sign-in form." },
+      { src: "/projects/drink-manage/dashboard.webp", label: "Dashboard", width: 1600, height: 843, alt: "Drink Manage dashboard showing sales, stock, crates, damages and receivables cards, with a sidebar of modules." },
+      { src: "/projects/drink-manage/login.webp", label: "Login", width: 1582, height: 728, alt: "Drink Manage login screen with a short list of the app's modules beside the sign-in form." },
     ],
   },
 ];
