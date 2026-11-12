@@ -11,7 +11,7 @@ export function Shell({ children }: { children: ReactNode }) {
   }, [hash, pathname]);
 
   return (
-    <div className="studio min-h-screen bg-paper font-sans text-charcoal lg:pl-[28rem]">
+    <div className="studio min-h-screen bg-paper font-sans text-charcoal lg:pl-112">
       <StudioPanel />
       <main className="px-6 py-8 lg:px-12 lg:py-12">{children}</main>
     </div>
