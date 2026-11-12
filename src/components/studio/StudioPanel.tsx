@@ -11,7 +11,7 @@ export function StudioPanel() {
   return (
     <aside
       id="home"
-      className="bg-charcoal text-paper lg:fixed lg:inset-y-0 lg:left-0 lg:w-[28rem] lg:overflow-y-auto"
+      className="bg-charcoal text-paper lg:fixed lg:inset-y-0 lg:left-0 lg:w-md lg:overflow-y-auto"
     >
       <div className="flex min-h-full flex-col px-6 py-8 lg:px-8">
         <header className="border-b border-paper/20 pb-4">
