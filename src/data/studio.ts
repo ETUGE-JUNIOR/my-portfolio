@@ -1,5 +1,28 @@
 export type Status = "live" | "in-development" | "draft";
 
+/** A screenshot. Without a src it is a placeholder: shown in development, hidden on the live site. */
+export interface Shot {
+  src?: string;
+  label: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+export interface Decision {
+  title: string;
+  text: string;
+  shots?: Shot[];
+}
+
+export interface Design {
+  intro: string;
+  session: string;
+  feedback: string[];
+  compare?: Shot[];
+  decisions: Decision[];
+}
+
 export interface CaseStudy {
   id: string;
   title: string;
@@ -10,7 +33,8 @@ export interface CaseStudy {
   proof?: string;
   role?: string;
   statusNote?: string;
-  images?: { src: string; label: string; alt: string; width: number; height: number }[];
+  images?: Shot[];
+  design?: Design;
   stack: string[];
   links?: { live?: string; code?: string };
 }
@@ -65,7 +89,7 @@ export const caseStudies: CaseStudy[] = [
     solution:
       "One app covers the whole cycle: stock entries tied to a supplier, returnable crates (casiers) with supplier balances, damages (avaries) that change stock only after an administrator validates them, cash and credit sales with automatic receipts, and reports exported to PDF. It installs on one computer and serves the others over the depot's local network, so it keeps working without internet. A hosted web version is planned.",
     role:
-      "Visual direction and UI/UX design, including user research and usability testing, then front-end development. The back end was built by Hassan Mimshe, who leads the project.",
+      "Visual direction and UI/UX design, including feedback sessions with a depot owner and cashier, then front-end development. The back end was built by Hassan Mimshe, who leads the project.",
     statusNote:
       "Design, interfaces and back end are done for version 1. The final installer and another round of MVP testing remain.",
     stack: ["Figma", "React", "JavaScript", "Node.js", "Express", "PostgreSQL", "Electron", "GitHub"],
@@ -73,6 +97,44 @@ export const caseStudies: CaseStudy[] = [
       { src: "/projects/drink-manage/dashboard.webp", label: "Dashboard", width: 1600, height: 843, alt: "Drink Manage dashboard showing sales, stock, crates, damages and receivables cards, with a sidebar of modules." },
       { src: "/projects/drink-manage/login.webp", label: "Login", width: 1582, height: 728, alt: "Drink Manage login screen with a short list of the app's modules beside the sign-in form." },
     ],
+    design: {
+      intro:
+        "I joined Drink Manage after the back-end developer had built a first version with a basic interface. I first fixed front-end errors he asked me to look at. Once I was fully on the project, I redesigned the interface, because it did not follow UI and UX principles or hold together as one flow.",
+      session:
+        "We showed the first interface to a local depot: the owner, and the cashier who runs the whole depot alone, from supply to stock to sales.",
+      feedback: [
+        "Too much data on each screen, which caused decision fatigue and slowed people down.",
+        "Navigation was hard to follow and changed from one part of the app to another.",
+        "The owner already uses digital products and found the flow clear, but he pointed out that many depot owners in Cameroon do not, so the app had to be simpler.",
+        "They asked whether past reports could be reviewed, so we showed reports for a chosen period.",
+      ],
+      compare: [
+        { label: "Version 0: dashboard (before)", width: 1600, height: 843, alt: "The first version of the Drink Manage dashboard, before the redesign." },
+        { src: "/projects/drink-manage/dashboard.webp", label: "Version 1: dashboard (after)", width: 1600, height: 843, alt: "The redesigned Drink Manage dashboard." },
+      ],
+      decisions: [
+        {
+          title: "One consistent interface",
+          text: "Every screen follows the same layout, spacing and controls, so the user feels they are using one product, not a set of separate pages.",
+          shots: [{ label: "Three screens, one layout", width: 1600, height: 843, alt: "Three Drink Manage screens that share the same layout, spacing and controls." }],
+        },
+        {
+          title: "Dashboard cards that carry less",
+          text: "Each card answers one question, such as sales today, stock, crates, damages or receivables, with one main figure and one action. The owner reads the state of the depot at a glance, which lowers the mental effort needed to understand the screen.",
+          shots: [{ label: "Dashboard cards, close up", width: 1200, height: 600, alt: "Close-up of the Drink Manage dashboard cards." }],
+        },
+        {
+          title: "A global search bar with suggestions",
+          text: "One search bar, opened with Ctrl K, searches across the software and suggests results as you type. People do not have to remember where things live, which cuts navigation effort and decision fatigue.",
+          shots: [{ label: "Global search with suggestions", width: 1200, height: 700, alt: "The Drink Manage search bar showing suggestions while typing." }],
+        },
+        {
+          title: "A colour and design system that feels like a family",
+          text: "A single palette, type scale and set of components runs through the whole app, so each new screen feels familiar before the user has read it.",
+          shots: [{ label: "Colours, type and components", width: 1200, height: 700, alt: "The Drink Manage colours, type and interface components." }],
+        },
+      ],
+    },
   },
 ];
 
