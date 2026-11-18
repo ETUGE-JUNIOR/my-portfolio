@@ -8,14 +8,48 @@
       name="description"
       content="A remote-first web design and development studio, building clear, fast websites and web apps for businesses in Cameroon and abroad."
     />
+    <meta name="theme-color" content="#f6f6f3" />
+    <!-- Apply the saved (or device) theme and language before first paint, so there is no flash. -->
+    <script>
+      (function () {
+        var theme = null;
+        var lang = null;
+        try {
+          theme = localStorage.getItem("emj-theme");
+          lang = localStorage.getItem("emj-lang");
+        } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        var root = document.documentElement;
+        root.setAttribute("data-theme", theme);
+        root.setAttribute("lang", lang === "fr" ? "fr" : "en");
+        var bar = document.querySelector('meta[name="theme-color"]');
+        if (bar) bar.setAttribute("content", theme === "dark" ? "#17181c" : "#f6f6f3");
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="EMJ Digital Studio" />
+    <meta property="og:title" content="EMJ Digital Studio" />
+    <meta
+      property="og:description"
+      content="Interfaces designed in Figma, shipped in React. A remote-first web design and development studio for businesses in Cameroon and abroad."
+    />
+    <meta property="og:url" content="https://emj-digital-studio.vercel.app/" />
+    <meta property="og:image" content="https://emj-digital-studio.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600&family=IBM+Plex+Mono&display=swap"
     />
-    <script type="module" crossorigin src="/assets/index-Dl_rsuQL.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BasY0WXR.css">
+    <script type="module" crossorigin src="/assets/index-DlgoqOxb.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bds0viVx.css">
   </head>
   <body>
     <div id="root"></div>

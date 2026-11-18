@@ -8,7 +8,26 @@
       name="description"
       content="A remote-first web design and development studio, building clear, fast websites and web apps for businesses in Cameroon and abroad."
     />
-    <meta name="theme-color" content="#1e2024" />
+    <meta name="theme-color" content="#f6f6f3" />
+    <!-- Apply the saved (or device) theme and language before first paint, so there is no flash. -->
+    <script>
+      (function () {
+        var theme = null;
+        var lang = null;
+        try {
+          theme = localStorage.getItem("emj-theme");
+          lang = localStorage.getItem("emj-lang");
+        } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        var root = document.documentElement;
+        root.setAttribute("data-theme", theme);
+        root.setAttribute("lang", lang === "fr" ? "fr" : "en");
+        var bar = document.querySelector('meta[name="theme-color"]');
+        if (bar) bar.setAttribute("content", theme === "dark" ? "#17181c" : "#f6f6f3");
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />

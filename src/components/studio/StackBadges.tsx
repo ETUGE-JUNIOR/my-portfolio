@@ -1,29 +1,29 @@
 import { stack } from "../../data/studio";
+import { useI18n } from "../../i18n/context";
+import { SectionHead } from "./SectionHead";
 
+/** A spec-sheet list: technology, how it was used, and where. */
 export function StackBadges() {
+  const { t, ui } = useI18n();
   return (
     <section id="stack" aria-labelledby="stack-title" className="scroll-mt-20">
-      <h2 id="stack-title" className="text-5xl font-semibold tracking-tight">
-        Tech stack
-      </h2>
-      <p className="mt-2 max-w-[60ch] text-charcoal/80">
-        Shipped means used in a deployed project. Practiced means on the CV, with no public project yet.
-      </p>
-      <ul className="mt-8 grid gap-px border border-charcoal bg-charcoal @xl:grid-cols-2 @4xl:grid-cols-3">
+      <SectionHead id="stack-title" index="04" title={ui.techStack} />
+      <p className="mb-6 max-w-[60ch] text-ink/80">{ui.stackNote}</p>
+      <ul className="border-t border-ink">
         {stack.map((s) => (
-          <li key={s.name} className="bg-paper p-4">
-            <div className="flex items-center justify-between gap-2">
-              <span className="font-medium">{s.name}</span>
+          <li
+            key={s.name}
+            className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 border-b border-ink py-3 @xl:grid-cols-[10rem_8rem_1fr]"
+          >
+            <span className="font-medium">{s.name}</span>
+            <span className={"flex items-center gap-2 font-mono text-xs " + (s.level === "shipped" ? "text-accent" : "text-ink/70")}>
               <span
-                className={
-                  "border px-2 py-0.5 text-xs " +
-                  (s.level === "shipped" ? "border-electric text-electric" : "border-rule text-charcoal/70")
-                }
-              >
-                {s.level === "shipped" ? "Shipped" : "Practiced"}
-              </span>
-            </div>
-            <p className="mt-2 text-sm text-charcoal/70">{s.evidence}</p>
+                aria-hidden="true"
+                className={"h-2 w-2 " + (s.level === "shipped" ? "bg-accent" : "border border-ink/50")}
+              />
+              {s.level === "shipped" ? ui.shipped : ui.practiced}
+            </span>
+            <span className="col-span-2 text-sm text-ink/70 @xl:col-span-1">{t(s.evidence)}</span>
           </li>
         ))}
       </ul>
