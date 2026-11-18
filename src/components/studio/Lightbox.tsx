@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type TouchEvent } from "react";
 import type { Shot } from "../../data/studio";
+import { Icon } from "../../icons/Icon";
+import { useI18n } from "../../i18n/context";
 
 interface LightboxProps {
   shots: Shot[];
@@ -9,12 +11,13 @@ interface LightboxProps {
 }
 
 const btn =
-  "border border-paper/40 px-3 py-1 transition-colors hover:bg-paper hover:text-charcoal motion-reduce:transition-none";
+  "inline-flex items-center gap-2 border border-paper/40 px-3 py-1 transition-colors hover:bg-paper hover:text-charcoal motion-reduce:transition-none";
 const arrow =
   "absolute top-1/2 -translate-y-1/2 border border-paper/40 bg-charcoal px-3 py-4 transition-colors hover:bg-paper hover:text-charcoal motion-reduce:transition-none";
 
 /** Full-size screenshot viewer: arrow keys, swipe, Escape, and an actual-size zoom. */
 export function Lightbox({ shots, index, onChange, onClose }: LightboxProps) {
+  const { t, ui } = useI18n();
   const [zoom, setZoom] = useState(false);
   const startX = useRef<number | null>(null);
   const count = shots.length;
@@ -83,7 +86,7 @@ export function Lightbox({ shots, index, onChange, onClose }: LightboxProps) {
       id="lightbox"
       role="dialog"
       aria-modal="true"
-      aria-label={shot.label}
+      aria-label={t(shot.label)}
       tabIndex={-1}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
@@ -91,7 +94,7 @@ export function Lightbox({ shots, index, onChange, onClose }: LightboxProps) {
     >
       <div className="flex items-center justify-between gap-4 border-b border-paper/20 px-4 py-3 text-sm">
         <p aria-live="polite" className="min-w-0 truncate">
-          <span className="font-medium">{shot.label}</span>
+          <span className="font-medium">{t(shot.label)}</span>
           <span className="ml-3 tabular-nums text-paper/60">
             {shot.width} × {shot.height}
           </span>
@@ -101,10 +104,11 @@ export function Lightbox({ shots, index, onChange, onClose }: LightboxProps) {
             {index + 1} / {count}
           </span>
           <button type="button" aria-pressed={zoom} onClick={() => setZoom((z) => !z)} className={btn}>
-            {zoom ? "Fit to screen" : "Actual size"}
+            {zoom ? ui.lightbox.fitToScreen : ui.lightbox.actualSize}
           </button>
           <button type="button" onClick={onClose} className={btn}>
-            Close
+            <Icon name="close" size={14} />
+            {ui.lightbox.close}
           </button>
         </div>
       </div>
@@ -113,7 +117,7 @@ export function Lightbox({ shots, index, onChange, onClose }: LightboxProps) {
         <div className={"h-full overflow-auto " + (zoom ? "" : "flex items-center justify-center p-4")}>
           <img
             src={shot.src}
-            alt={shot.alt}
+            alt={t(shot.alt)}
             width={shot.width}
             height={shot.height}
             onClick={() => setZoom((z) => !z)}
@@ -124,22 +128,18 @@ export function Lightbox({ shots, index, onChange, onClose }: LightboxProps) {
 
         {count > 1 && (
           <>
-            <button type="button" aria-label="Previous screenshot" onClick={() => go(-1)} className={arrow + " left-2"}>
-              <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M7.5 2L3.5 6l4 4" />
-              </svg>
+            <button type="button" aria-label={ui.lightbox.previous} onClick={() => go(-1)} className={arrow + " left-2"}>
+              <Icon name="chevron-left" />
             </button>
-            <button type="button" aria-label="Next screenshot" onClick={() => go(1)} className={arrow + " right-2"}>
-              <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M4.5 2l4 4-4 4" />
-              </svg>
+            <button type="button" aria-label={ui.lightbox.next} onClick={() => go(1)} className={arrow + " right-2"}>
+              <Icon name="chevron-right" />
             </button>
           </>
         )}
       </div>
 
       <p className="border-t border-paper/20 px-4 py-2 text-xs text-paper/60">
-        Arrow keys to move. Z or click to zoom. Escape to close.
+        {ui.lightbox.hint}
       </p>
     </div>
   );

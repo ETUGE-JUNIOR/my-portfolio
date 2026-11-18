@@ -1,25 +1,75 @@
-/* EMJ Digital Studio tokens. Import AFTER globals.css (see src/styles/index.css).
-   Grid rule: 8pt. In Tailwind v4 the default step is 4px, so use EVEN steps only
-   (p-2 = 8, p-4 = 16, p-6 = 24, p-8 = 32). Layout anchors: panel 28rem (448), meta column 16rem (256). */
+/* EMJ Digital Studio tokens. Import AFTER tailwindcss (see src/styles/index.css).
+   Grid rule: 8pt (8-point) for layout and component SIZES. Tailwind v4 steps are 4px, so use EVEN steps
+   (p-2 = 8, p-4 = 16, p-6 = 24, p-8 = 32). A 4px half-step is allowed INSIDE a component (icon gaps,
+   tag offsets, small paddings: gap-1, px-3, py-1). Never 2px, 6px or 10px steps.
+   Controls (buttons, inputs, select, header controls) are 40px tall: h-10, never py-based.
+   Layout anchors: drawer 20rem (320), meta column 16rem (256).
+
+   Colours come in two layers:
+   - Brand constants (charcoal, paper, electric, electric-soft) never change. The drawer and the
+     screenshot viewer use them directly, so they stay dark in both themes.
+   - Semantic tokens (surface, ink, rule, accent, on-accent) swap with the theme. Components use these. */
 @theme {
-  --color-electric: #4a3aff;       /* accent on paper (6.9:1) */
-  --color-electric-soft: #9a92ff;  /* accent on charcoal (text-safe) */
+  --color-electric: #4a3aff;       /* brand accent on paper (5.81:1). Never place it on charcoal (2.59:1): use electric-soft there */
+  --color-electric-soft: #9a92ff;  /* brand accent on charcoal (text-safe) */
   --color-charcoal: #1e2024;
   --color-paper: #f6f6f3;
-  --color-rule: #d6d6d0;
+
+  --color-surface: #f6f6f3;        /* page and card background */
+  --color-ink: #1e2024;            /* text, strong borders, inverted hover fills */
+  --color-rule: #d6d6d0;           /* quiet borders */
+  --color-accent: #4a3aff;         /* accent for text, borders and fills */
+  --color-on-accent: #f6f6f3;      /* text on an accent fill */
+
   --font-sans: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
+:root {
+  color-scheme: light;
+  --grid-line: rgb(30 32 36 / 0.05);
+  --dot: rgb(30 32 36 / 0.22);
+}
+
+/* Dark theme. Contrast: accent on surface 6.7:1, ink at 70% on surface 8.5:1. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-surface: #17181c;
+  --color-ink: #f6f6f3;
+  --color-rule: #3a3d45;
+  --color-accent: #9a92ff;
+  --color-on-accent: #17181c;
+  --grid-line: rgb(246 246 243 / 0.06);
+  --dot: rgb(246 246 243 / 0.2);
+}
+
 @layer base {
-  .studio :focus-visible { outline: 2px solid var(--color-electric); outline-offset: 2px; }
+  .studio :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
   .studio aside :focus-visible { outline-color: var(--color-electric-soft); }
 }
 
 /* Grid-paper texture: 32px squares, a multiple of the 8pt grid */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgb(30 32 36 / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(30 32 36 / 0.05) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 32px 32px;
+}
+
+/* Design-canvas texture: 16px dot grid (a multiple of the 8pt grid) */
+.bg-dots {
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* One quiet entrance for the hero. Skipped entirely when the visitor prefers reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+  .rise { animation: rise 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .rise-2 { animation-delay: 80ms; }
+  .rise-3 { animation-delay: 160ms; }
+  .rise-4 { animation-delay: 240ms; }
 }
